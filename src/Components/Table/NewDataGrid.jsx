@@ -1,9 +1,7 @@
-import React, { useEffect, useState } from 'react';
-import DataTable from 'datatables.net-react';
-import DT from 'datatables.net-dt'; // DataTables CSS
-import '../App.css'; // Custom styles
+import React, { useEffect, useRef, useState } from 'react';
+import '../../App.css';
+import ReactDataTables from './CustomTable'
 
-DataTable.use(DT); // Ensuring correct styles are used for DataTables
 
 const DataGrid = () => {
     const [tableData, setTableData] = useState([]);
@@ -15,7 +13,6 @@ const DataGrid = () => {
             const responseData = await response.json();
             setTableData(responseData);
 
-            // Generate column keys dynamically based on the first item in the data
             if (responseData.length > 0) {
                 const generatedColumns = Object.keys(responseData[0]).map((key) => {
                     let customTitle;
@@ -24,20 +21,20 @@ const DataGrid = () => {
                             customTitle = 'User ID';
                             break;
                         case 'id':
-                            customTitle = 'Post ID';
+                            customTitle = 'ID';
                             break;
                         case 'title':
-                            customTitle = 'Post Title';
+                            customTitle = 'Title';
                             break;
                         case 'body':
-                            customTitle = 'Post Body';
+                            customTitle = 'Body';
                             break;
                         default:
-                            customTitle = key; // Default to the key itself if no match
+                            customTitle = key;
                     }
                     return { data: key, title: customTitle };
                 });
-                setColumnKeys(generatedColumns); // Set generated columns to state
+                setColumnKeys(generatedColumns);
             }
         } catch (error) {
             console.log('Error fetching data:', error);
@@ -45,7 +42,7 @@ const DataGrid = () => {
     };
 
     useEffect(() => {
-        getData(); // Fetch data on component mount
+        getData();
     }, []);
 
     const fallbackColumns = [
@@ -56,12 +53,14 @@ const DataGrid = () => {
     ];
 
     return (
-        <div>
-            <DataTable
-                data={tableData} // Pass the fetched data
-                columns={columnKeys.length > 0 ? columnKeys : fallbackColumns} // Use columnKeys if available, otherwise fallback
+        <div className='flex items-center justify-center m-10 '>
+            <ReactDataTables
+                data={tableData}
+                columns={columnKeys.length > 0 ? columnKeys : fallbackColumns}
                 className="display"
-                responsive={true} // Make table responsive
+                select={true}
+                responsive={true}
+
             />
         </div>
     );

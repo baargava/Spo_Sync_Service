@@ -1,5 +1,5 @@
 import './App.css';
-import DataGrid from './Components/DataGrid';
+import DataGrid from './Components/Table/OldDataGrid';
 
 function App() {
   return (
