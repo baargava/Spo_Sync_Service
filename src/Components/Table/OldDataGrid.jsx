@@ -55,7 +55,7 @@ const DataGrid = () => {
     ];
 
     return (
-        <div className='flex items-center justify-center m-10 '>
+        <div className='m-10 '>
             <DataTable
                 data={tableData}
                 columns={columnKeys.length > 0 ? columnKeys : fallbackColumns}
