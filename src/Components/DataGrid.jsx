@@ -9,7 +9,6 @@ const DataGrid = () => {
     const [tableData, setTableData] = useState([]);
     const [columnKeys, setColumnKeys] = useState([]);
 
-    // Fetch data from the API
     const getData = async () => {
         try {
             const response = await fetch('https://jsonplaceholder.typicode.com/posts');
@@ -49,7 +48,6 @@ const DataGrid = () => {
         getData(); // Fetch data on component mount
     }, []);
 
-    // Fallback columns in case no data is available
     const fallbackColumns = [
         { data: 'userId', title: 'UserId' },
         { data: 'id', title: 'ID' },
