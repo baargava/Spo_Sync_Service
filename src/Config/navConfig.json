@@ -1,0 +1,20 @@
+
+{
+  "navLinks": [
+    {
+      "name": "Dashboard",
+      "path": "/",
+      "exact":true
+    },
+    {
+      "name": "Downloads",
+      "path": "/download",
+      "exact":false
+    },
+    {
+      "name": "DataGrid",
+      "path": "/datagrid",
+      "exact":false
+    }
+  ]
+}
